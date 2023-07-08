@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-const Todo = (props) => {
-  console.log(props)
-  const {addTodo , test} = props
+const Todo = (addTodo) => {
+  const addTodo2 = addTodo?.addTodo;
+
+  console.log("function run done");
 
   const [value , setValue] = useState('');
   
@@ -12,8 +13,6 @@ const Todo = (props) => {
   }
 
   const submitHandler = () => {
-    console.log(test, ' <=== ')
-    test();
     if(value !== ""){
         const newTodo = {
             id : Date.now(),
@@ -21,7 +20,7 @@ const Todo = (props) => {
             running : false,
             time: 0
         };
-        addTodo(newTodo);
+        addTodo2(newTodo);
         setValue('');
     }
 }

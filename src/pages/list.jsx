@@ -1,10 +1,7 @@
-import React , {useState , useEffect} from 'react';
+import React , { useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import Todo from './todo';
 
-const List = () => {
-
-    const [todos , setTodos] = useState([])
+const List = ({todos , setTodos}) => {
 
     const toggleTimer = (id) => {
         const updatedTodos = todos.map((todo) => {
@@ -31,19 +28,8 @@ const List = () => {
         return () => clearInterval(interval);
     }, [])
 
-    const addTodo = (newTodo) => {
-        setTodos([...todos, newTodo]);
-      };
-
-    const test = () => {
-        console.log("Test function worrking perfectly :) ");
-    }
-
   return (
     <div className='w-[100vw] h-[100vh]'>
-        <div className='hidden'>
-            <Todo addTodo={addTodo} test={test}/>
-        </div>
       <ul className='flex flex-column gap-3'>
                 {todos.map((todo)=>{
                     return (
@@ -83,7 +69,7 @@ const List = () => {
                 })}
             </ul>
             <Link to="/todo" >
-                <button className='h-[30px] w-[30px] border border-blue bg-blue text-white rounded-2xl d-flex justify-content-center align-align-items-center add-btn'><i class="fa fa-plus"></i></button>
+                <button className='h-[30px] w-[30px] border border-blue bg-blue text-white rounded-2xl d-flex justify-content-center align-align-items-center add-btn'><i className="fa fa-plus"></i></button>
           </Link>
       
     </div>
