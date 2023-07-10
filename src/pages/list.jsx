@@ -54,7 +54,7 @@ const List = ({todos , setTodos}) => {
                         <li key={todo.id}>
                             <div className={`task-complete ${todo.status === 2 ? 'active' : ''} flex gap-5 w-[100%] items-center`}>
                                 <div className='flex gap-8 pl-4 items-center'>
-                                    {/* <div className='text-3xl'><i class="fa fa-caret-right"></i></div> */}
+                                    {/* <div  className='text-3xl'><i class="fa fa-caret-right"></i></div> */}
                                     <div className="toggle-button">
                                         <input
                                             id={`on-${todo.id}`}
@@ -86,18 +86,19 @@ const List = ({todos , setTodos}) => {
                                             onClick={() => toggleTimer(todo.id)}>
                                             {' '}
                                             </label>
+
                                     </div>
 
-                                    <div className='flex flex-col'>
+                                    {/* <div className='flex flex-col'> */}
                                         <div className='todo-text text-text-color text-3xl'>{todo.text}</div>
-                                        <div className='flex align-items-center mt-1 justify-between w-[60vw]'>
+                                        <div className='flex align-items-center mt-1 justify-between w-[50vw]'>
                                             <div 
                                             className={`
                                             ${todo.status === 0 ? 'pendding-text' : ''}
                                             ${todo.status === 1 ? 'ongoing-text' : ''}
                                             ${todo.status === 2 ? 'complete-text' : ''}
                                             `}>
-                                                {statusText}
+                                                {''}
                                             </div>
                                             <div className='timer'>
                                                 <span>{String(Math.floor((todo.time / (1000 * 60 * 60)) % 24)).padStart(2, '0')}</span>:
@@ -106,7 +107,8 @@ const List = ({todos , setTodos}) => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+
+                                {/* </div> */}
                             </div>
                         </li>
                     )

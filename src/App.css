@@ -115,7 +115,7 @@ input[type="radio"] {
 }
 
 button{
-  opacity: .9;
+  /* opacity: .9; */
 }
 
 button:hover {
