@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
-const Todo = (addTodo) => {
-  const addTodo2 = addTodo?.addTodo;
+const Todo = ({addTodo}) => {
+  console.log(addTodo);
 
   console.log("function run done");
 
@@ -20,21 +20,22 @@ const Todo = (addTodo) => {
             running : false,
             time: 0
         };
-        addTodo2(newTodo);
+        addTodo(newTodo);
         setValue('');
     }
 }
 
   return (
-    <div className='pl-9 pt-5'>
+    <div className='px-9 py-5'>
       <div className='text-blue text-[46px] font-bold'>Create New Task</div>
       <div  className=" h-[75vh] w-[95vw] text-2xl">
           <textarea type="text" className='h-[100%] w-[100%] py-4 px-2 border-none ' value={value} onChange={inputHandler} placeholder="Write your task to achive goals ..."/>
       </div>
-      <button
-      className='h-[30px] w-[30px] border border-green bg-green text-white rounded-2xl d-flex justify-content-center align-align-items-center right-btn'
-      onClick={() => submitHandler()}><i className="fa fa-check"></i></button>
+      
       <Link to="/" >
+        <button
+        className='h-[30px] w-[30px] border border-green bg-green text-white rounded-2xl d-flex justify-content-center align-align-items-center right-btn'
+        onClick={() => submitHandler()}><i className="fa fa-check"></i></button>
         <button className='h-[30px] w-[30px] border border-red bg-red text-white rounded-2xl d-flex justify-content-center align-align-items-center add-btn'><i className="fa fa-close"></i></button>
       </Link>
     </div>

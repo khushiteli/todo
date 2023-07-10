@@ -29,40 +29,47 @@ const List = ({todos , setTodos}) => {
     }, [])
 
   return (
-    <div className='w-[100vw] h-[100vh]'>
-      <ul className='flex flex-column gap-3'>
+    <div className='w-[100vw] h-[100vh] px-9 py-5'>
+        <div className='text-blue text-[46px] font-bold mb-4'>Daily Task </div>
+        <ul className='flex flex-col gap-5'>
                 {todos.map((todo)=>{
                     return (
-                        <li key={todo.id}>
-                            <div className='todo-text'>{todo.text}</div>
-                            <div className="switch-toggle switch-3 switch-candy btn">
-                                <input
-                                id={`on-${todo.id}`}
-                                name={`state-${todo.id}`}
-                                type="radio"
-                                checked={todo.running}
-                                onChange={() => toggleTimer(todo.id)}
-                                />
-                                <label  onClick={() => toggleTimer(todo.id)}>
-                                Start
-                                </label>
-                                <input id={`na-${todo.id}`} name={`state-${todo.id}`} type="radio" checked={!todo.running} />
-                                <input
-                                id={`off-${todo.id}`}
-                                name={`state-${todo.id}`}
-                                type="radio"
-                                checked={!todo.running}
-                                onChange={() => toggleTimer(todo.id)}
-                                />
-                                <label  onClick={() => toggleTimer(todo.id)}>
-                                End
-                                </label>
-                            </div>
+                        <li key={todo.id} className='flex gap-5 w-[100%]'>
+                            <div><i class="fa fa-caret-right"></i></div>
+                            <div>
+                                <div className='todo-text text-xl'>{todo.text}</div>
+                                <div className="toggle-button">
+                                    <input
+                                    id={`on-${todo.id}`}
+                                    name={`state-${todo.id}`}
+                                    type="radio"
+                                    checked={todo.running}
+                                    onChange={() => toggleTimer(todo.id)}
+                                    />
+                                    <label  onClick={() => toggleTimer(todo.id)}>
+                                    Start
+                                    </label>
+                                    <input id={`na-${todo.id}`} name={`state-${todo.id}`} type="radio" checked={!todo.running} />
+                                    <label  onClick={() => toggleTimer(todo.id)}>
+                                    pause
+                                    </label>
+                                    <input
+                                    id={`off-${todo.id}`}
+                                    name={`state-${todo.id}`}
+                                    type="radio"
+                                    checked={!todo.running}
+                                    onChange={() => toggleTimer(todo.id)}
+                                    />
+                                    <label  onClick={() => toggleTimer(todo.id)}>
+                                    End
+                                    </label>
+                                </div>
 
-                            <div className='timer'>
-                                <span>{String(Math.floor((todo.time / (1000 * 60 * 60)) % 24)).padStart(2, '0')}</span>:
-                                <span>{String(Math.floor((todo.time / (1000 * 60)) % 60)).padStart(2, '0')}</span>:
-                                <span>{String(Math.floor((todo.time / 1000) % 60)).padStart(2, '0')}</span>
+                                <div className='timer'>
+                                    <span>{String(Math.floor((todo.time / (1000 * 60 * 60)) % 24)).padStart(2, '0')}</span>:
+                                    <span>{String(Math.floor((todo.time / (1000 * 60)) % 60)).padStart(2, '0')}</span>:
+                                    <span>{String(Math.floor((todo.time / 1000) % 60)).padStart(2, '0')}</span>
+                                </div>
                             </div>
                         </li>
                     )
@@ -75,8 +82,6 @@ const List = ({todos , setTodos}) => {
     </div>
   )
 }
-
-
 
 
 export default List;
