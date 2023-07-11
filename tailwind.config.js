@@ -5,14 +5,15 @@ module.exports = {
   ],
   theme: {
     colors: {
-      'blue': '#0cf',
+      'blue': '#2694fb',
       'white': '#fff',
       'red': '#e53935',
-      'green': '#5FA052',
+      'green': '#36B37E',
       'dark-black': '#181820',
       'light-pink': '#FC76A1',
       'text-color':'#9CA3AF',
-      // 'light-pink': '#D1768F'  
+      'title-color': '#1a388e' ,
+      'gray': '	#808080' ,
     },
   },
   plugins: [],
