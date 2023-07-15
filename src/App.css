@@ -5,6 +5,7 @@
   --bg: #aab0c7;
 	--text: #000;
   --title:#1a388e;
+  --light-blue:#2694fb;
 }
 
 .wrapper{
@@ -116,4 +117,12 @@ li{
   padding-right: 5px;
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+input[type="email"]:focus,input[type="password"]:focus{
+  outline: none;
+}
+
+.shadow-contain{
+  box-shadow: var(--light-blue) 1px 1px 10px 1px;
 }

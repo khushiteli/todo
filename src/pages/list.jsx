@@ -32,7 +32,7 @@ const List = ({ todos, setTodos, setEditTodo }) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, );
 
   const EditHandler = (id) => {
     const TodoEdit = todos.find((todo) => todo.id === id);

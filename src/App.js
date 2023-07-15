@@ -3,6 +3,7 @@ import "./App.css";
 import List from "./pages/list";
 import Todo from "./pages/todo";
 import { useState } from "react";
+import SignUp from "./pages/signUp";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -30,7 +31,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="wrapper font-sans text-white flex justify-center overflow-hidden">
+      <div className="wrapper font-sans text-white h-screen items-center flex justify-center overflow-hidden">
         <Routes>
           <Route
             path="/"
@@ -38,6 +39,7 @@ function App() {
             element={<List todos={todos} setTodos={setTodos} setEditTodo={setEditTodo}/>}
           />
           <Route path="/todo" element={<Todo todos={todos} setTodos={setTodos} addTodo={addTodo} setEditTodo={setEditTodo} editTodo={editTodo}/>} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>
     </BrowserRouter>
