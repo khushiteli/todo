@@ -1,6 +1,6 @@
 import React from 'react'
 
-const InputSlice = ({setvalue}) => {
+const InputSlice = ({setvalue , value}) => {
   return (
     <>
       <div className="rounded-full py-2 px-4 flex gap-3 items-center shadow-contain">
@@ -9,7 +9,9 @@ const InputSlice = ({setvalue}) => {
           type="email"
           name="email"
           id="email"
+          maxLength="10"
           placeholder="E-mail"
+          value={value?.email ? value?.email : ""}
           onChange={(event) => {
             setvalue((prev) => ({ ...prev, email: event.target.value }));
           }}
@@ -22,6 +24,7 @@ const InputSlice = ({setvalue}) => {
           name="password"
           id="password"
           placeholder="Password"
+          value={value?.pass ? value?.pass : ""}
           onChange={(event) => {
             setvalue((prev) => ({ ...prev, pass: event.target.value }));
           }}
