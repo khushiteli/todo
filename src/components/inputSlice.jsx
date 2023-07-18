@@ -9,7 +9,6 @@ const InputSlice = ({setvalue , value}) => {
           type="email"
           name="email"
           id="email"
-          maxLength="10"
           placeholder="E-mail"
           value={value?.email ? value?.email : ""}
           onChange={(event) => {

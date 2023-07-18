@@ -29,18 +29,47 @@ function App() {
     setTodos([...todos, newTodo]);
   };
 
+  const [currentUser, setCurrentUser] = useState("");
+
   return (
     <BrowserRouter>
       <div className="wrapper font-sans text-white h-screen items-center flex justify-center overflow-hidden">
-        <Routes>
-          <Route
-            path="/"
-            exact
-            element={<List todos={todos} setTodos={setTodos} setEditTodo={setEditTodo}/>}
-          />
-          <Route path="/todo" element={<Todo todos={todos} setTodos={setTodos} addTodo={addTodo} setEditTodo={setEditTodo} editTodo={editTodo}/>} />
-          <Route path="/signup" element={<SignUp />} />
-        </Routes>
+        {currentUser && (
+          <Routes>
+            <Route
+              path="/"
+              exact
+              element={
+                <List
+                  todos={todos}
+                  setTodos={setTodos}
+                  setEditTodo={setEditTodo}
+                />
+              }
+            />
+            <Route
+              path="/todo"
+              element={
+                <Todo
+                  todos={todos}
+                  setTodos={setTodos}
+                  addTodo={addTodo}
+                  setEditTodo={setEditTodo}
+                  editTodo={editTodo}
+                />
+              }
+            />
+          </Routes>
+        )}
+        {!currentUser && (
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={<SignUp setCurrentUser={setCurrentUser} />}
+            />
+          </Routes>
+        )}
       </div>
     </BrowserRouter>
   );

@@ -14,7 +14,7 @@ import "react-phone-input-2/lib/style.css";
 import OtpInput from "react-otp-input";
 import { toast, Toaster } from "react-hot-toast";
 
-const SignUp = () => {
+const SignUp = ({ setCurrentUser }) => {
   const [value, setvalue] = useState({
     email: " ",
     pass: " ",
@@ -33,7 +33,9 @@ const SignUp = () => {
     createUserWithEmailAndPassword(auth, value.email, value.pass)
       .then(
         (userCredential) => {
-          console.log(userCredential.user);
+          console.log("user --> ", userCredential);
+          console.log(userCredential.user); //user object when user create successfully
+          setCurrentUser(userCredential.user);
         },
         setvalue(() => {
           value.email = " ";
@@ -76,7 +78,7 @@ const SignUp = () => {
       })
       .finally(() => {
         setLoading(false);
-      })
+      });
   };
 
   const verfyOTPHandler = () => {
@@ -84,7 +86,10 @@ const SignUp = () => {
     window.confirmationResult
       .confirm(otp)
       .then(async (res) => {
-        console.log(res);
+        console.log("user --> ", res?.user); 
+
+        setCurrentUser(res?.user);                                            //set value
+
         setOtpContainer(false);
         setText("User signed in successfully :) ");
       })
@@ -121,10 +126,13 @@ const SignUp = () => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
-        console.log(token);
+        console.log("token --> ", token); //access token in gogle sign in
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
+        console.log("user --> ", user); //google sign in user details
+
+        setCurrentUser(user);
+
         // IdP data available using getAdditionalUserInfo(result)
         // ...
       })
@@ -142,7 +150,7 @@ const SignUp = () => {
         console.log("credential --> ", credential);
         // ...
       });
-  }
+  };
 
   return (
     <div className="w-3/4 h-3/4 shadow-2xl flex rounded-lg overflow-hidden">
@@ -168,12 +176,15 @@ const SignUp = () => {
             >
               Sign up
             </button>
-            <button className="flex items-center bg-google-blue py-1 gap-2 text-white rounded-sm w-[85%]" onClick={signWithGoogleHandler}>
+            <button
+              className="flex items-center bg-google-blue py-1 gap-2 text-white rounded-sm w-[85%]"
+              onClick={signWithGoogleHandler}
+            >
               <img
                 alt="google"
                 className="bg-white p-[2px] ml-1"
-                height='250px'
-                width='25px'
+                height="250px"
+                width="25px"
                 src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
               />
               Continue with google
