@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState } from "react";
+
 import "./App.css";
 import List from "./pages/list";
 import Todo from "./pages/todo";
-import { useState } from "react";
-import SignUp from "./pages/signUp";
+import SignUp from "./pages/signUp"; //try to import all from one file
 
 function App() {
   const [todos, setTodos] = useState([
@@ -74,5 +75,29 @@ function App() {
     </BrowserRouter>
   );
 }
+
+/*
+
+  / => list todo
+  /create => crerate todo
+  /edit/:id => edit todo
+  /login => Login Page
+
+  if user is not loged in and try to access protected page then redirect it to login page 
+
+  make a folder for styles
+
+  learn all about folder files
+    setupTessts.js
+    reportWebVitals.js
+    app.test.js
+    
+  Why react strick mode ?
+   
+  put all img in assests
+  
+  after successfull test remove useState initial value
+
+*/
 
 export default App;

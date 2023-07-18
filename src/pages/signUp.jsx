@@ -12,20 +12,26 @@ import InputSlice from "../components/inputSlice";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import OtpInput from "react-otp-input";
-import { toast, Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast"; //deferentiate all links with custom component or package components
 
 const SignUp = ({ setCurrentUser }) => {
   const [value, setvalue] = useState({
-    email: " ",
-    pass: " ",
+    email: "",
+    pass: "",
   });
-  const [errorMsg, setErrorMsg] = useState("");
+  // Containers
   const [emailContainer, setEmailContainer] = useState(true);
-  const [numberSignup, setNumberSignup] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [otpContainer, setOtpContainer] = useState(false);
+  const [numberSignup, setNumberSignup] = useState(false);
+  
+  // Forms
   const [otp, setOtp] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  // Submission states
+  const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
+
   const [text, setText] = useState("");
 
   const submitHandler = () => {
@@ -247,3 +253,41 @@ const SignUp = ({ setCurrentUser }) => {
 };
 
 export default SignUp;
+
+
+
+/* 
+  all import statements 
+    2 category 
+      1-> package imports
+      2-> custom imports
+      
+  all hooks or life-cycle methods
+  
+  all useEffects
+
+  make a single state for all like not in boolean try using string value
+
+  create 3 components -> 
+    1-> emailContainer
+    2-> NumberContainer
+    3-> OTPContainer
+    
+  set loader when api calling 
+  
+  user will not able to click again and again 
+  if api calling is running then disable all others
+
+  in UI 
+
+  otp input not matching with theme
+
+            sign up
+                or
+        num | google
+        
+  add log out also
+   
+  learn about 3 types of storage like session storage , local storage, cookies
+  set expiry of log in 
+*/
