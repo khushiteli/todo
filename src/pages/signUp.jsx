@@ -3,6 +3,8 @@ import "../App.css";
 import {
   createUserWithEmailAndPassword,
   signInWithPhoneNumber,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth, RecaptchaVerifier } from "../config/firebase";
 import FormSlice from "../components/formSlice";
@@ -112,6 +114,36 @@ const SignUp = () => {
     }
   };
 
+  const signWithGoogleHandler = () => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        console.log(token);
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        console.log("error code --> ", errorCode);
+        const errorMessage = error.message;
+        console.log("error msg --> ", errorMessage);
+        // The email of the user's account used.
+        const email = error.customData.email;
+        console.log("email --> ", email);
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        console.log("credential --> ", credential);
+        // ...
+      });
+  }
+
   return (
     <div className="w-3/4 h-3/4 shadow-2xl flex rounded-lg overflow-hidden">
       <div className="w-[50%] flex flex-col items-center justify-center gap-5">
@@ -121,26 +153,36 @@ const SignUp = () => {
           <div className="flex flex-col gap-5">
             <InputSlice setvalue={setvalue} value={value} />
             <div className="text-red font-medium -mb-5">{errorMsg}</div>
+            <div
+              onClick={() => {
+                setNumberSignup(true);
+                setEmailContainer(false);
+              }}
+              className="underline cursor-pointer text-end -mb-4"
+            >
+              Continue with number
+            </div>
             <button
               className="bg-blue text-white rounded-full py-2 text-lg "
               onClick={submitHandler}
             >
               Sign up
             </button>
-            <div
-              onClick={() => {
-                setNumberSignup(true);
-                setEmailContainer(false);
-              }}
-              className="underline cursor-pointer"
-            >
-              Continue with number
-            </div>
+            <button className="flex items-center bg-google-blue py-1 gap-2 text-white rounded-sm w-[85%]" onClick={signWithGoogleHandler}>
+              <img
+                alt="google"
+                className="bg-white p-[2px] ml-1"
+                height='250px'
+                width='25px'
+                src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              />
+              Continue with google
+            </button>
           </div>
         )}
 
         <div id="recaptcha-container"></div>
-        <div>{ text }</div>
+        <div>{text}</div>
         <Toaster toastOptions={{ duration: 4000 }} />
 
         {/* sign in with phone number */}
