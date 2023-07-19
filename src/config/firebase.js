@@ -5,6 +5,10 @@ import {
   RecaptchaVerifier,
   signInWithPopup,
   GoogleAuthProvider,
+  setPersistence,
+  indexedDBLocalPersistence,
+  browserSessionPersistence,
+  signOut,
 } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,4 +30,14 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth();
 
-export { app, auth, RecaptchaVerifier, signInWithPopup, GoogleAuthProvider };
+export {
+  app,
+  auth,
+  RecaptchaVerifier,
+  signInWithPopup,
+  GoogleAuthProvider,
+  setPersistence,
+  indexedDBLocalPersistence,
+  browserSessionPersistence,
+  signOut,
+};

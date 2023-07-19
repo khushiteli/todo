@@ -1,10 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
+import { onAuthStateChanged } from "firebase/auth";
 
-import "./App.css";
+import { auth } from "./config/firebase";
+import "./assets/styles/App.css";
 import List from "./pages/list";
-import Todo from "./pages/todo";
+import CreateTodo from "./pages/createTodo";
+import EditTodo from "./pages/editTodo";
 import SignUp from "./pages/signUp"; //try to import all from one file
+import PrivateRoutes from "./utlis/privateRoutes";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -24,19 +29,32 @@ function App() {
     },
   ]);
 
-  const [editTodo , setEditTodo] = useState(null);
+  const [editTodo, setEditTodo] = useState(null);
 
   const addTodo = (newTodo) => {
     setTodos([...todos, newTodo]);
   };
 
-  const [currentUser, setCurrentUser] = useState("");
+  const [isLoggedIn, setLoggedIn] = useState(null);
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        console.log("Logged in ", user);
+        setLoggedIn(user);
+      } else {
+        console.log("Logged out");
+      }
+    });
+  }, []);
 
   return (
     <BrowserRouter>
       <div className="wrapper font-sans text-white h-screen items-center flex justify-center overflow-hidden">
-        {currentUser && (
-          <Routes>
+        <Toaster toastOptions={{ duration: 4000 }} />
+        {console.log("user----> ", isLoggedIn)}
+        <Routes>
+          <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} />}>
             <Route
               path="/"
               exact
@@ -45,32 +63,31 @@ function App() {
                   todos={todos}
                   setTodos={setTodos}
                   setEditTodo={setEditTodo}
+                  setLoggedIn={setLoggedIn}
                 />
               }
             />
             <Route
-              path="/todo"
+              path="/create"
               element={
-                <Todo
+                <CreateTodo addTodo={addTodo} setLoggedIn={setLoggedIn} />
+              }
+            />
+            <Route
+              path="/edit/:id"
+              element={
+                <EditTodo
                   todos={todos}
                   setTodos={setTodos}
-                  addTodo={addTodo}
                   setEditTodo={setEditTodo}
                   editTodo={editTodo}
+                  setLoggedIn={setLoggedIn}
                 />
               }
             />
-          </Routes>
-        )}
-        {!currentUser && (
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={<SignUp setCurrentUser={setCurrentUser} />}
-            />
-          </Routes>
-        )}
+          </Route>
+          <Route path="/login" element={<SignUp />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

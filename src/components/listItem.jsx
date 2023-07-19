@@ -90,7 +90,7 @@ const ListItem = ({todo , toggleTimer , EditHandler , DeleteHandler}) => {
                     </div>
                     <div className="flex flex-col items-end gap-2 pr-2">
                       <div className="flex gap-2">
-                        <Link to="/todo">
+                        <Link to={`edit/${todo.id}`}>
                           <button
                             className="bg-green text-white w-[35px] h-[35px] flex justify-center items-center rounded-lg "
                             onClick={() => EditHandler(todo.id)}
