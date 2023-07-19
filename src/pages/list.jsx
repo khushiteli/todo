@@ -55,7 +55,7 @@ const List = ({ todos, setTodos, setEditTodo, setLoggedIn }) => {
       <div className="text-title-color text-[52px] font-bold mb-4 relative">
         Daily Task
       </div>
-      {console.log(todos.filter((todo) => todo.status === 2))}
+      {/* {console.log(todos.filter((todo) => todo.status === 2))} */}
       <ul className="flex flex-col gap-5 list-container w-[100%]">
         {todos
           .filter((todo) => todo.status === 1)

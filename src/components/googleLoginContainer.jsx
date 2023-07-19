@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import {
   auth,
   setPersistence,
-  // indexedDBLocalPersistence,
-  browserSessionPersistence,
+  indexedDBLocalPersistence,
+  // browserSessionPersistence,
 } from "../config/firebase";
 
 const GoogleLoginContainer = () => {
@@ -15,7 +15,7 @@ const GoogleLoginContainer = () => {
   
   const signWithGoogleHandler = () => {
     
-    setPersistence(auth, browserSessionPersistence)
+    setPersistence(auth, indexedDBLocalPersistence)
       .then(() => {
         // Existing and future Auth states are now persisted in the current
         // session only. Closing the window would clear any existing state even
@@ -36,7 +36,7 @@ const GoogleLoginContainer = () => {
 
             // setCurrentUser(user);
             console.log("user loged in success");
-            navigate('/')
+            navigate("/");
           })
           .catch((error) => {
             console.log("Error occurance --> ", error);

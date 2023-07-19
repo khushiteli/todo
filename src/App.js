@@ -52,7 +52,7 @@ function App() {
     <BrowserRouter>
       <div className="wrapper font-sans text-white h-screen items-center flex justify-center overflow-hidden">
         <Toaster toastOptions={{ duration: 4000 }} />
-        {console.log("user----> ", isLoggedIn)}
+        {/* {console.log("user----> ", isLoggedIn)} */}
         <Routes>
           <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} />}>
             <Route

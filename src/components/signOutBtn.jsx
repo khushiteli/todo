@@ -2,14 +2,16 @@ import React from 'react'
 import {signOut} from 'firebase/auth'
 
 import {auth} from "../config/firebase"
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SignOutBtn = () => {
+  const navigate = useNavigate();
+
      const signOutHandler = ({ setLoggedIn }) => {
        signOut(auth)
          .then(() => {
            // Sign-out successful.
-           // navigate("/");
+           navigate("/login");
            console.log("Signed out successfully");
            setLoggedIn(null);
          })

@@ -33,8 +33,8 @@ const EmailContainer = ({ setCurrentUser, setContainer }) => {
       .catch((error) => {
         setErrorMsg(error.code);
         setvalue(() => {
-          value.email = " ";
-          value.pass = " ";
+          value.email = "";
+          value.pass = "";
         });
         console.log(error);
         console.log("response status : ", error.code);

@@ -50,7 +50,6 @@ const SignUp = () => {
         )}
 
         <div id="recaptcha-container"></div>
-        {/* <div>{text}</div> */}
       </div>
       <FormSlice />
     </div>
