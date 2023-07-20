@@ -27,7 +27,9 @@ const CreateTodo = ({ addTodo, setLoggedIn }) => {
 
   return (
     <div className="px-9 py-5 w-[80vw]">
-      <SignOutBtn setLoggedIn={setLoggedIn} />
+      <div className="absolute top-16 right-40">
+        <SignOutBtn setLoggedIn={setLoggedIn} />
+      </div>
       <div>
         <div className="text-title-color text-[46px] font-bold">
           Create New Task

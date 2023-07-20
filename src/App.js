@@ -1,91 +1,72 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { onAuthStateChanged } from "firebase/auth";
 
-import { auth } from "./config/firebase";
+import { List, CreateTodo , EditTodo , SignUp } from "./pages";
 import "./assets/styles/App.css";
-import List from "./pages/list";
-import CreateTodo from "./pages/createTodo";
-import EditTodo from "./pages/editTodo";
-import SignUp from "./pages/signUp"; //try to import all from one file
 import PrivateRoutes from "./utlis/privateRoutes";
 
 function App() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: "test1",
-      running: false,
-      status: 0,
-      time: 0,
-    },
-    {
-      id: 2,
-      text: "test2",
-      running: false,
-      status: 0,
-      time: 0,
-    },
-  ]);
-
+  const [todos, setTodos] = useState([]);
   const [editTodo, setEditTodo] = useState(null);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const addTodo = (newTodo) => {
     setTodos([...todos, newTodo]);
   };
 
-  const [isLoggedIn, setLoggedIn] = useState(null);
-
-  useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        console.log("Logged in ", user);
-        setLoggedIn(user);
-      } else {
-        console.log("Logged out");
-      }
-    });
-  }, []);
-
   return (
     <BrowserRouter>
       <div className="wrapper font-sans text-white h-screen items-center flex justify-center overflow-hidden">
         <Toaster toastOptions={{ duration: 4000 }} />
-        {/* {console.log("user----> ", isLoggedIn)} */}
         <Routes>
-          <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} />}>
-            <Route
-              path="/"
-              exact
-              element={
-                <List
-                  todos={todos}
-                  setTodos={setTodos}
-                  setEditTodo={setEditTodo}
-                  setLoggedIn={setLoggedIn}
-                />
-              }
-            />
-            <Route
-              path="/create"
-              element={
-                <CreateTodo addTodo={addTodo} setLoggedIn={setLoggedIn} />
-              }
-            />
-            <Route
-              path="/edit/:id"
-              element={
-                <EditTodo
-                  todos={todos}
-                  setTodos={setTodos}
-                  setEditTodo={setEditTodo}
-                  editTodo={editTodo}
-                  setLoggedIn={setLoggedIn}
-                />
-              }
-            />
-          </Route>
+          <Route
+            path="/"
+            element={
+              <PrivateRoutes
+                isLoggedIn={isLoggedIn}
+                setLoggedIn={setLoggedIn}
+                element={
+                  <List
+                    todos={todos}
+                    setTodos={setTodos}
+                    setEditTodo={setEditTodo}
+                    setLoggedIn={setLoggedIn}
+                  />
+                }
+              />
+            }
+          />
+          <Route
+            path="/create"
+            element={
+              <PrivateRoutes
+                isLoggedIn={isLoggedIn}
+                setLoggedIn={setLoggedIn}
+                element={
+                  <CreateTodo addTodo={addTodo} setLoggedIn={setLoggedIn} />
+                }
+              />
+            }
+          />
+          <Route
+            path="/edit/:id"
+            element={
+              <PrivateRoutes
+                isLoggedIn={isLoggedIn}
+                setLoggedIn={setLoggedIn}
+                element={
+                  <EditTodo
+                    todos={todos}
+                    setTodos={setTodos}
+                    setEditTodo={setEditTodo}
+                    editTodo={editTodo}
+                    setLoggedIn={setLoggedIn}
+                  />
+                }
+              />
+            }
+          />
           <Route path="/login" element={<SignUp />} />
         </Routes>
       </div>
@@ -110,6 +91,7 @@ function App() {
     app.test.js
     
   Why react strick mode ?
+  ->helps find components that break these rules also it doesn't work in production code & it calls every function twice in development
    
   put all img in assests
   

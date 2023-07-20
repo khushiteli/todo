@@ -27,7 +27,9 @@ const EditTodo = ({ editTodo, todos, setTodos, setEditTodo, setLoggedIn }) => {
 
   return (
     <div>
-      <SignOutBtn setLoggedIn={setLoggedIn} />
+      <div className="absolute top-16 right-40">
+        <SignOutBtn setLoggedIn={setLoggedIn} />
+      </div>
       <div className="text-title-color text-[46px] font-bold">
         Edit your Task
       </div>

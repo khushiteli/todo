@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { auth, RecaptchaVerifier } from "../config/firebase";
-import FormSlice from "../components/formSlice";
 
-import NumberLoginContainer from "../components/numberLoginContainer";
-import EmailContainer from "../components/emailLoginContainer";
-import VerifyOTPContainer from "../components/verifyOTPContainer";
+import {
+  NumberLoginContainer,
+  EmailLoginContainer,
+  VerifyOTPContainer,
+} from "../components";
 
 const SignUp = () => {
 
@@ -36,22 +37,24 @@ const SignUp = () => {
         <h3 className="font-bold text-3xl text-blue">Hello friend!</h3>
 
         {container === "EmailContainer" && (
-          <EmailContainer
-            setContainer={setContainer}
-          />
+          <EmailLoginContainer setContainer={setContainer} />
         )}
 
         {container === "NumberLoginContainer" && (
           <NumberLoginContainer setContainer={setContainer} />
         )}
 
-        {container === "VerifyOTPContainer" && (
-          <VerifyOTPContainer />
-        )}
+        {container === "VerifyOTPContainer" && <VerifyOTPContainer />}
 
         <div id="recaptcha-container"></div>
       </div>
-      <FormSlice />
+      <div className="w-[50%] flex flex-col items-center justify-center gap-5 bg-blue px-5">
+        <h3 className="font-bold text-3xl text-white">Glad to see you ! </h3>
+        <p className="text-lg text-white">
+          Lorem ipsum dolor sit amet. Qui laboriosam consequatur qui dolore
+          necessitatibus qui sunt quod non dolor laboriosam sit possimus rerum
+        </p>
+      </div>
     </div>
   );
 };

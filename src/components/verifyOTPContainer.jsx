@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import OtpInput from 'react-otp-input';
 import { useNavigate } from 'react-router-dom';
 
-const VerifyOTPContainer = ({ setCurrentUser ,setText }) => {
+const VerifyOTPContainer = ({ setText }) => {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
 
@@ -12,8 +12,6 @@ const VerifyOTPContainer = ({ setCurrentUser ,setText }) => {
       .confirm(otp)
       .then(async (res) => {
         console.log("user --> ", res?.user);
-        setCurrentUser(res?.user);
-        setText("User signed in successfully :) ");
         navigate("/")
       })
       .catch((err) => {
@@ -35,7 +33,7 @@ const VerifyOTPContainer = ({ setCurrentUser ,setText }) => {
           gap: "5px",
           justifyContent: "center",
         }}
-        inputStyle={{ border: "1px solid #000", borderRadius: "5px" }}
+        inputStyle={{ border: "1px solid grey", borderRadius: "2px" }}
         renderInput={(props) => <input {...props} />}
       />
       <button

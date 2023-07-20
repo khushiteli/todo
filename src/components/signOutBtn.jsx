@@ -21,9 +21,11 @@ const SignOutBtn = () => {
      };
     
   return (
-    <Link to="/login">
+    <Link
+      to="/login"
+    >
       <button
-        className="absolute top-1 right-3 bg-blue p-2 text-white rounded-lg"
+        className={`bg-blue p-2 text-white rounded-lg`}
         onClick={signOutHandler}
       >
         Sign out
